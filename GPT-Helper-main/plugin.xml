@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension point="org.eclipse.ui.views">
+      <view
+            class="gptpro.View"
+            id="gptpro.view1"
+            name="practice"
+            restorable="true">
+      </view>
+   </extension>
+   <extension point="org.eclipse.ui.handlers">
+      <handler
+            class="gptpro.OpenAIHandler"
+            commandId="ApiCommand">
+      </handler>
+      <handler
+            class="gptpro.ToolbarHandler"
+            commandId="gptpro.ToolbarCommand">
+      </handler>
+      <handler
+            class="gptpro.Copy"
+            commandId="gptpro.copyCommand">
+      </handler>
+   </extension>
+   <extension point="org.eclipse.ui.commands">
+      <command
+            defaultHandler="gptpro.OpenAIHandler"
+            id="ApiCommand"
+            name="gptname">
+      </command>
+   
+      <command
+            id="gptpro.copyCommand"
+            name="copy">
+      </command>
+   </extension>
+   <extension point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="true"
+            locationURI="toolbar:org.eclipse.ui.main.toolbar">
+         <toolbar id="gptpro.toolbar1">
+            <command
+                  commandId="gptpro.ToolbarCommand"
+                  icon="icons/icon.png"
+                  style="push"
+                  tooltip="GPTHelper">
+            </command>
+         </toolbar>
+      </menuContribution>
+   </extension>
+   <extension point="org.eclipse.ui.popupMenus">
+      <viewerContribution
+            id="GPT_Helper.viewerContribution1"
+            targetID="GPT_Helper.viewerContribution1">
+         <action
+               class="com.example.popupmenu.MyContribution"
+               id="com.example.popupmenu.action"
+               label="Error Helper By GPTl"
+               menubarPath="additions">
+         </action>
+      </viewerContribution>
+   </extension>
+   <extension point="org.eclipse.ui.popupMenus">
+      <objectContribution
+         id="errorContribution"
+         objectClass="org.eclipse.core.resources.IMarker"
+         adaptable="true"
+         nameFilter="*"
+         ordering="before=additions">
+         <action
+            class="gptpro.ErrorHelperAction"
+            id="ErrorHelper"
+            label="Error Helper"
+            menubarPath="navigate"
+            enablesFor="1">
+         </action>
+      </objectContribution>
+   </extension>
+   <extension point="org.eclipse.ui.popupMenus">
+      <objectContribution
+         adaptable="true"
+         id="gptpro.contribution"
+         objectClass="org.eclipse.jdt.core.IJavaElement">
+         <action
+            class="gptpro.AddEditMemoAction"
+            enablesFor="1"
+            id="gptpro.addEditMemoAction"
+            label="Add/Edit Memo"
+            menubarPath="additions">
+         </action>
+         <action
+            class="gptpro.FindMemoAction"
+            enablesFor="1"
+            id="gptpro.findMemoAction"
+            label="Find Memo"
+            menubarPath="additions">
+         </action>
+      </objectContribution>
+   </extension>
+ 
+   
+  
+   
+</plugin>
